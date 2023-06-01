@@ -1,3 +1,3 @@
 DEBUG = True
-USENAME = 'john'
+USERNAME = 'john'
 PASSWORD = 'due123'
