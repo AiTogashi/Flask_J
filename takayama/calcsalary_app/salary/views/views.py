@@ -1,5 +1,5 @@
 from flask import request, redirect, url_for, render_template, flash, session
-from flask_blog import app
+from Flask_J.takayama.calcsalary_app.salary.views import app
 
 @app.route("/")
 def show_entries():
