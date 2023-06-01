@@ -17,7 +17,7 @@ def login():
         elif request.form['password'] != app.config['PASSWORD']:
             print('パスワードが異なります')
         else:
-            return redirect('')
+            return redirect('/')
     return render_template('login.html')
 
 @app.route('/logout')
