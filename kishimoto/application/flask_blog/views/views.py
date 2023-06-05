@@ -1,9 +1,17 @@
 #Flaskから必要なモジュールをインポート
 from flask import request, redirect, url_for, render_template, flash, session
 from flask_blog import app
+from functools import wraps 
 
+def login_required(view): 
+    @wraps(view) 
+    def inner(*args,**kwargs):
+        if not session.get('logged_in'): 
+            return redirect( url_for('login')) 
+        return view(*args,**kwargs) 
+    return inner
 
-@app. route('/')   #http:// 127. 0. 0. 1: 5000/ にリクエストがあった際にshow_ entries()というメソッドが呼び出される。
+@app.route('/')   #http:// 127. 0. 0. 1: 5000/ にリクエストがあった際にshow_entries()というメソッドが呼び出される。
 def show_entries(): 
     if not session.get('logged_in'):  #session情報を保存    
         return redirect('/login')

@@ -9,4 +9,5 @@ db = SQLAlchemy(app)
 app.config.from_object('flask_blog.config')
 #viewsをimport
 # import kishimoto.application.flask_blog.views.views
-from flask_blog.views import views, entries
+
+import flask_blog.views
