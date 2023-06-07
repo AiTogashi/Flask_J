@@ -1,5 +1,6 @@
 {% extends "layout.html" %} {% block body %}
-<form action="{{ url_for('input') }}" method="post">
+<br />
+<form action="{{ url_for('add_holiday') }}" method="post">
   <div class="form-group">
     <label for="">祝日日付</label>
     <input type="date" class="form-control" name="holiday" value="" />
@@ -8,6 +9,7 @@
     <label for="">祝日テキスト</label>
     <input type="text" class="form-control" name="holiday_text" value="" />
   </div>
+  <br />
   <div class="btn-group">
     <button
       type="submit"
@@ -18,6 +20,8 @@
       新規登録・更新
     </button>
   </div>
+</form>
+<form action="" method="post">
   <div class="btn-group">
     <button type="submit" class="btn btn-danger" name="button" value="delete">
       削除
@@ -25,7 +29,7 @@
   </div>
 </form>
 <br /><br />
-<form action="">
+<form action="{{ url_for('list') }}" method="post">
   <div class="btn-group">
     <button type="submit" class="btn btn-secondary">一覧出力</button>
   </div>
