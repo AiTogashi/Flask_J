@@ -3,4 +3,4 @@ from holiday import app
 from holiday import db
 from holiday.models.entries import Entry
 from holiday.views.views import login_required
-from flask import Blueprint
+from flask import Blueprintz
