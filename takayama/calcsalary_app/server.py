@@ -1,4 +1,4 @@
-from calcsalary_app import app
+from salary import app
 
 if __name__ == "__main__":
     app.run()
