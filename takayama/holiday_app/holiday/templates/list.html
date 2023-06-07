@@ -2,14 +2,11 @@
     <br>
     <table class="table">
         {% if holidaylist %}
-        <thead>
             <tr>
                 <th style="background-color: cornflowerblue;">祝日</th>
                 <th style="background-color: cornflowerblue;">テキスト</th>
             </tr>
-        </thead>
-
-        <tbody>       
+     
             {% for holiday in holidaylist %}
             <tr>
                 <td class="holi_date">{{ holiday.holi_date }}</td>    
@@ -23,9 +20,7 @@
                 </td>
             </tr>
             {% endif %}     
-        </tbody>
     </table>    
-    <br>
 
     <form action="{{ url_for('input') }}" method="post">
         <button type="submit" class="btn btn-primary">戻る</button>
