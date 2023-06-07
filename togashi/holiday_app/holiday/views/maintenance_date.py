@@ -6,7 +6,46 @@ from datetime import date
 
 @app.route("/maintenance_date", methods=["POST"])
 def maintenance_date():
+    if request.form["holiday"]=="":
+        flash("祝日 日付を選択してください")
+        if request.form["holiday_text"]=="":
+            flash("祝日 テキストを記入してください")
+            return redirect(url_for("input"))
+        return redirect(url_for("input"))
+    elif request.form["holiday_text"]=="":
+        flash("祝日 テキストを記入してください")
+        return redirect(url_for("input"))
+    
     dt = date(int(request.form["holiday"][0:4]), int(request.form["holiday"][5:7]), int(request.form["holiday"][8:10]))                 
+    if request.form["button"] == "insert_update": 
+        holiday = Holiday.query.filter_by(holi_date=dt).first()
 
-    return render_template("result.html")
+        if holiday is None:
+            holi_new = Holiday(holi_date=dt, holi_text=request.form["holiday_text"])
+            db.session.add(holi_new)
+            db.session.commit()
+            result_message=request.form["holiday"]+"（" + request.form["holiday_text"] + "）が登録されました"
+        else:
+            holi_new = Holiday(holi_date=dt,holi_text=request.form["holiday_text"])
+            db.session.merge(holi_new)
+            db.session.commit()
+            result_message=request.form["holiday"]+"「" + request.form["holiday_text"] + "」に更新されました"
+
+        return render_template("result.html", result_message = result_message)
+
+    elif request.form["button"] == "delete":
+        holiday = Holiday.query.filter_by(holi_date=dt).first()
+
+        if holiday is None:
+            flash("祝日マスタが登録されていません")
+            return redirect(url_for("input"))
+        else:
+            Holiday.query.filter_by(holi_date = dt).delete()
+            db.session.commit() 
+            result_message=request.form["holiday"]+"（" + request.form["holiday_text"] + "）は、削除されました"
+
+        return render_template("result.html", result_message = result_message)                            
+
+
+    # return render_template("result.html")
                       
