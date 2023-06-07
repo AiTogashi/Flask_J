@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 
 <head>
-    <title>祝日マスタ管理</title><!--タイトル-->
+    <title>祝日マスタ管理</title>
 
-    <!-- 外部スタイルシート読み込み-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -13,16 +12,20 @@
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">祝日マスタ管理</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="{{ url_for('input') }}">祝日マスタ管理</a>
         </nav>
-        <div class="blog-body">
-            {%block body%} {%endblock%}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-info" role="alert">
+            {{ message }}
         </div>
+        {% endfor %}
+        <div class="maintenance-body">
+            {% block body %}
+            {% endblock %}
+        </div>
+
     </div>
+
 
 
 </body>
