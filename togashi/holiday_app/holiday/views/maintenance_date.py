@@ -16,6 +16,7 @@ def maintenance_date():
         flash("祝日 テキストを記入してください")
         return redirect(url_for("input"))
     
+    text = request.form["holiday_text"]
     dt = date(int(request.form["holiday"][0:4]), int(request.form["holiday"][5:7]), int(request.form["holiday"][8:10]))                 
     if request.form["button"] == "insert_update": 
         holiday = Holiday.query.filter_by(holi_date=dt).first()
@@ -35,17 +36,18 @@ def maintenance_date():
 
     elif request.form["button"] == "delete":
         holiday = Holiday.query.filter_by(holi_date=dt).first()
+        holiday_text = Holiday.query.filter_by(holi_text=text).first()
 
         if holiday is None:
-            flash("祝日マスタが登録されていません")
+            flash(request.form["holiday"]+"は、祝日マスタに登録されていません")
             return redirect(url_for("input"))
         else:
+            if holiday_text is None:
+                flash("入力テキストが祝日マスタに登録されたテキストと一致しません")
+                return redirect(url_for("input"))
+
             Holiday.query.filter_by(holi_date = dt).delete()
             db.session.commit() 
             result_message=request.form["holiday"]+"（" + request.form["holiday_text"] + "）は、削除されました"
-
-        return render_template("result.html", result_message = result_message)                            
-
-
-    # return render_template("result.html")
+            return render_template("result.html", result_message = result_message)                            
                       
