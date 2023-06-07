@@ -4,6 +4,6 @@ from holiday import db
 from holiday.models.mst_holidays import Holiday
 
 @app.route("/list", methods=["POST"])
-def list():
+def list1():
     holidaylist = Holiday.query.all()
     return render_template('list.html', holidaylist=holidaylist)
