@@ -1,14 +1,29 @@
-from cola_app import db
-#from datetime import datetime
+from sqlalchemy import *
+from sqlalchemy.orm import *
+from sqlalchemy.ext.declarative import declarative_base
+import os
 
-class Studyipa(db.Model):
-    __tablename__ = 'holiday'
-    holi_date = db.Column('holi_date', db.Date, primary_key = True)
-    holi_text = db.Column('holi_text', db.String(20))    
+DATABASE = "mysql+pymysql://{user}:{password}@{host}/{database}?charset=utf8".format(**{
+    "user":os.getenv("DB_USER","root"),
+    "password":os.getenv("DB_PASSWORD","mysql"),
+    "host":os.getenv("DB_HOST","localhost"),
+    "database":os.getenv("DB_DATABASE","ENSHU")
+})
 
-    def __init__(self, holi_date=None, holi_text=None):
-        self.holi_date = holi_date
-        self.holi_text = holi_text
+ENGINE = create_engine(
+    DATABASE,
+    encoding = "utf-8",
+    echo = True
+)
 
-    def __repr__(self):
-        return '<holi_date:{} holi_text:{}>'.format(self.holi_date, self.holi_text)
+# Sessionの作成
+session = scoped_session (
+    sessionmaker(
+        autocommit = False,
+        autoflush= False,
+        bind= ENGINE
+    )
+)
+
+Base = declarative_base()
+Base.query = session.query_property

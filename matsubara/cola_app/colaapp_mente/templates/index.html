@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {% block body %}
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="table-primary" scope="col">id</th>
+            <th class="table-primary" scope="col">名前</th>
+            <th class="table-primary" scope="col">説明</th>
+            <th class="table-primary" scope="col">味</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for colakind in colakindlist %}
+        <tr>
+            <td class="cola_id" scope="row">{{ colakind.cola_id }}</td>
+            <td class="cola_name" scope="row">{{ colakind.cola_name }}</td>
+            <td class="cola_text" scope="row">{{ colakind.cola_text }}</td>
+            <td class="cola_taste" scope="row">{{ colakind.cola_taste }}</td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>
+                祝日マスタが登録されていません
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+
+<form action="{{ url_for('list') }}" method="post">
+    <button type="submit" class="btn btn-primary">登録</button>
+</form>
+<br>
+<br>
+{%endblock%}

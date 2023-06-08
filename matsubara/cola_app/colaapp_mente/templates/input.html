@@ -1,3 +1,6 @@
 {% extends "layout.html" %} {% block body %}
 <h1>CRAFTCOLAは世界を救う！</h1>
+<form action="{{ url_for('index') }}" method="post">
+    <button type="submit" class="btn btn-danger">登録完了！</button>
+</form>
 {% endblock %}
