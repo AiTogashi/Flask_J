@@ -1,7 +1,7 @@
 from flask import request, redirect, url_for, render_template, flash, session
-from holiday import app
-from holiday import db
-from holiday.models.mst_holidays import Holiday
+from ipass import app
+from ipass import db
+from ipass.models.mst_ipass import ITpassport
 from datetime import date
 
 @app.route("/maintenance_date", methods=["POST"])
@@ -49,5 +49,5 @@ def maintenance_date():
             Holiday.query.filter_by(holi_date = dt).delete()
             db.session.commit() 
             result_message=request.form["holiday"]+"（" + request.form["holiday_text"] + "）は、削除されました"
-            return render_template("result.html", result_message = result_message)
+            return render_template("result.html", result_message = result_message)                            
                       

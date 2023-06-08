@@ -3,13 +3,13 @@
         <form form action="{{url_for('maintenance_date')}}" method="post">
             <div class="form-group">
                 <label for="Holiday">祝日 日付</label>
-                <input type="date" class="form-control" id="Holiday" name="holiday">
+                <input type="text" class="form-control" id="IT_word" name="itword">
             </div>
         
 
         <div class="form-group">
             <label for="HolidayText">祝日 テキスト</label>
-            <input type="text" class="form-control" id="HolidayText" name="holiday_text">
+            <input type="text" class="form-control" id="IT_mean" name="itmean">
         </div>
         
         <div class="btn-group">
@@ -18,7 +18,7 @@
         <div class="btn-group">                
             <button type="submit" class="btn btn-danger" name="button" value="delete">削除</button>
         </div>
-        
+
         </form>
     </div>
     <br>

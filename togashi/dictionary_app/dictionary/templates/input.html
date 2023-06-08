@@ -1,0 +1,54 @@
+<!doctype html>
+<title>ITパスポート用語集</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{url_for('input')}}">ITパスポート用語集</a>
+    </nav>
+
+    {%for message in get_flashed_messages()%}
+    <div class="alert alert-info" role="alert">
+        {{message}}
+    </div>
+    {%endfor%}
+
+    <div class="maintenance-body">
+    <p>ITパスポート用語集</p>
+    
+        <form form action="{{url_for('maintenance_word')}}" method="post">
+            <div class="form-group">
+                <label for="IT_word">用語</label>
+                <input type="text" class="form-control" id="IT_word" name="IT_word">
+            </div>
+        
+
+        <div class="form-group">
+            <label for="Mean">意味</label>
+            <input type="text" class="form-control" id="mean" name="mean">
+        </div>
+        
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary" name="button" value="insert_update">新規登録・更新</button>
+        </div>
+        <div class="btn-group">                
+            <button type="submit" class="btn btn-danger" name="button" value="delete">削除</button>
+        </div>
+
+        <div class="btn-group">                
+            <button type="submit" class="btn btn-primary" name="button" value="serch">検索</button>
+        </div>
+
+
+        </form>
+        <form action="{{url_for('list')}}" method="post">
+            <br>
+        <button type="submit" class="btn btn-secondary">一覧表示</button>
+    </form>
+    </div>
+
+</div>
