@@ -8,8 +8,8 @@ from colaapp_mente.scripts.intable import Colakind
 @app.route("/list", methods=["POST"])
 def list():
     colakindlist = Colakind.query.all()
-    return render_template('input.html',colakindlist = colakindlist)
+    return render_template('index.html',colakindlist = colakindlist)
 
 @app.route("/index",methods = ["POST"])
 def backpage():
-    return render_template('result.html')
+    return render_template('list.html')
